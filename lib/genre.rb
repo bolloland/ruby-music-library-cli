@@ -1,7 +1,9 @@
 
-
+require 'pry'
 class Genre
+    extend Concerns::Findable #extends this module (and its methods) into Genre
     attr_accessor :name, :song, :genre
+    attr_reader 
 
         @@all = []
 
@@ -24,9 +26,9 @@ class Genre
     end
 
     def self.create(name)
-        self.new(name)
-        @@all << self
-        self
+        genre = new(name)
+        genre.save
+        genre
     end
 
     def songs
@@ -46,6 +48,6 @@ class Genre
         xx = @songs.map {|s| s.artist}
         xx.uniq
     end
-
+#binding.pry
 
 end

@@ -1,9 +1,10 @@
-require_relative '../lib/song.rb'
-require_relative '../lib/genre.rb'
-require 'pry'
-class Artist
-    attr_accessor :name, :song, :genre
 
+require 'pry'
+# require_relative '../lib/concerns/findable.rb'
+class Artist
+    extend Concerns::Findable #brings this module (and its methods) into Artist
+    attr_accessor :name, :song, :genre
+    
         @@all = []
 
     def initialize(name)
@@ -25,11 +26,12 @@ class Artist
     end
 
     def self.create(name)
-        self.new(name)
-        @@all << self
-        self
+        artist = new(name)
+        artist.save
+        #binding.pry
+        artist
     end
-
+        
     def songs
         @songs
     end

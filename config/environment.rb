@@ -1,13 +1,11 @@
 require 'bundler'
 require 'pry'
-require_relative '../lib/concerns/findable'
-require_relative '../lib/artist.rb'
-require_relative '../lib/song.rb'
-require_relative '../lib/genre.rb'
 
 Bundler.require
 
 module Concerns
 end
 
-require_all 'lib'
+require_all 'lib' #this pulls EVERYTHING from the lib folder.
+#Don't repeat yourself if this is here. aka, no re_re's needed from lib. 
+#it's already been requested with this code.
