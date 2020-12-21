@@ -54,15 +54,21 @@ class Song
     end
 
     def self.new_from_filename(filename)
-        #binding.pry
         artist = filename.split(" - ")[0]
-        name = filename.split(" - ")[1]
+        song = filename.split(" - ")[1]
         genre = filename.split(" - ")[2].delete_suffix(".mp3")        
-        self.new(name, artist, genre)
-       
+        #^^splits filename by "-" and saves the splits as their respective names
+        artist = Artist.find_or_create_by_name(artist)
+        genre = Genre.find_or_create_by_name(genre)
+        # ^^ they're currently strings, so have to run those through the find/create method in Findable method
+        new(song, artist, genre) #<< is this overkill?
+        #binding.pry
     end
 
-    #  def artist_name=(artist_name)
-    #self.artist = Artist.find_or_create_by_name(artist_name) 
-    #end
+    def self.create_from_filename(filename)
+        new_from_filename(filename)
+        
+    end
+
+   
 end

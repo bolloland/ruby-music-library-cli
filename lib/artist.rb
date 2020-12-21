@@ -4,13 +4,13 @@ require 'pry'
 class Artist
     extend Concerns::Findable #brings this module (and its methods) into Artist
     attr_accessor :name, :song, :genre
-    
+    # attr_reader :artist
         @@all = []
 
     def initialize(name)
         @name = name
-        save
         @songs = []
+        save
     end
 
     def self.all
@@ -37,16 +37,23 @@ class Artist
     end
 
     def add_song(song)
-        if song.artist == nil
-            song.artist = self
-        end
-       if !@songs.include?(song)
-        @songs << song
-       end
+    song.artist = self unless song.artist
+    #makes the song's artist THAT artist, 
+    #unless the song HAS an artist (song.artist is true)
+    @songs << song unless @songs.include?(song)
+    #pushes the new song into @songs array, UNLESS
+    #that song already exists in there.
+    end
+        #     if song.artist == nil
+    #         song.artist = self
+    #     end
+    #    if !@songs.include?(song)
+    #     @songs << song
+    #    end
         # x = Song.new(song)
         # x.artist = self
         # Song.all << x
-    end
+    
 
     def genres
         xx = @songs.map {|s| s.genre}
