@@ -36,13 +36,13 @@ class Genre
     end
 
     def add_song(song)
-        if song.genre == nil
-            song.genre = self
+        song.genre = self unless song.genre
+        #makes the song's genre THAT genre, 
+        #unless the song HAS an genre (song.genre is true)
+        @songs << song unless @songs.include?(song)
+        #pushes the new song into @songs array, UNLESS
+        #that song already exists in there.
         end
-       if !@songs.include?(song)
-        @songs << song
-       end
-    end
 
     def artists
         xx = @songs.map {|s| s.artist}
